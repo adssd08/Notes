@@ -26,4 +26,14 @@ const deleteNote = (req, res) => {
 			res.status(404).json({ msg: err });
 		});
 };
-module.exports = { addNote, getNotes, deleteNote };
+const getCustomNotes = (req, res) => {
+	const regExp = new RegExp(req.body.data);
+	Notes.find({ data: { $regex: regExp, $options: "g" } })
+		.then(data => {
+			res.status(200).json({ data: data });
+		})
+		.catch(err => {
+			res.status(404).json({ msg: err });
+		});
+};
+module.exports = { addNote, getNotes, deleteNote, getCustomNotes };

@@ -9,7 +9,7 @@ const Notes = () => {
 	const dispatch = useDispatch();
 	const { notes, status } = useSelector(state => state.notes || state.status);
 	useEffect(() => {
-		axios.get(`http://localhost:3001/api/v1/note`).then(data => {
+		axios.get(`http://localhost:3001/api/v1/getnotes`).then(data => {
 			dispatch(loadNotes(data.data.data));
 		});
 	}, [status]);
